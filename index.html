@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<title>My Todo App</title>
+		<link rel="stylesheet" type="text/css" href="css/cssreset.css">
+		<link rel="stylesheet/less" type="text/css" href="css/todos.less">
+		<script src="js/libs/less/less-1.3.0.min.js"type="text/javascript"></script>
+		<script data-main="js/main" src="js/libs/require/require.js"></script>
+	</head>
+	<body>
+		<div class='instruction1'>
+				Drag down to create new category<br />Swipe left to delete a category<br />Click and hold to sort<br />Click the number to enter a category
+		</div>
+		<div class='instruction2'>
+				Drag down to create new item<br />Swipe left to delete an item<br />Swipe right to finish an item<br />Drag up to remove finished items<br />Drag down all the way to go back to category list 
+		</div>
+		<div id="todoapp">			
+			<div class="title">
+				<h1>Todos</h1>
+			</div>
+
+			<div class="content">
+				<div class='goback'></div>
+				<div class='newItem'></div>
+				<ul></ul>
+			</div>
+		</div>
+	</body>
+</html>
