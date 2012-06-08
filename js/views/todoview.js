@@ -1,12 +1,11 @@
 define([
 	'jquery', 
 	'underscore', 
-	'backbone',
-    'views/BaseView', 
+	'backbone', 
     'shared',
 	'text!templates/todo.html'
-	], function($, _, Backbone, BaseView, Shared, todoTemplate){
-	var TodoView = BaseView.extend({
+	], function($, _, Backbone, Shared, todoTemplate){
+	var TodoView = Backbone.View.extend({
 
 		// This is a list tag
 		tagName: 'li',
@@ -60,7 +59,7 @@ define([
                 return model.attributes.category == self.category.name;
             });
             _.bindAll(this, 'render', 'close');
-        	this.bindTo(this.model, 'change', this.render);
+        	this.model.bind('change', this.render);
         },
 
         // Re-render the content of the todo item 

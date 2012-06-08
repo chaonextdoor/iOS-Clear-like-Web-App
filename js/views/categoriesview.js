@@ -3,11 +3,10 @@ define([
 	'underscore',
 	'backbone',
     'models/todo',
-    'views/BaseView',
 	'views/categoryview',
 	'text!templates/category.html',
-	], function($, _, Backbone, TodoModel, BaseView, CategoryView, categoryTemplate){
-	var CategoryListView = BaseView.extend({
+	], function($, _, Backbone, TodoModel, CategoryView, categoryTemplate){
+	var CategoryListView = Backbone.View.extend({
 		
 		
 		el: $('div.content'),
@@ -36,8 +35,8 @@ define([
 
     	initialize: function(){
             _.bindAll(this, 'addOne', 'addAll', 'render');
-    		this.bindTo(this.collection, 'reset', this.render);
-    		this.bindTo(this.collection, 'add', this.addOne);
+    		this.collection.bind('reset', this.render);
+    		this.collection.bind('add', this.addOne);
             //this.collection.bind('all', this.render);
     	},
 

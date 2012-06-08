@@ -2,10 +2,9 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-    'views/BaseView',
 	'text!templates/category.html'
-	], function($, _, Backbone, BaseView, categoryTemplate){
-	var CategoryView = BaseView.extend({
+	], function($, _, Backbone, categoryTemplate){
+	var CategoryView = Backbone.View.extend({
 
 		// This is a list tag
 		tagName: 'li',
@@ -46,7 +45,7 @@ define([
             this.category.todosData = JSON.parse(localStorage.getItem('clearApp-todo'));
             this.category.allCategories = options.categories;
             _.bindAll(this, 'render', 'close');
-    	    this.bindTo(this.model, 'change', this.render);
+    	    this.model.bind('change', this.render);
         },
 
         // Re-render the content of the category item 
@@ -239,14 +238,16 @@ define([
                     this.$('div.category').animate({left: leftoffset}, 500, function(){
                         // Delete all the todo items under this category
                         self.category.deletedCategory = self.model.attributes.category;
-                        var i = 1;
-                        while(self.category.todosData[i] != null) {i++;}
-                        var length = i - 1;
-                        if (length !== 0 && self.category.deletedCategory !== null) {
-                            for (var j = 1; j <= length; j++) {
-                                if (self.category.todosData[j].category == self.category.deletedCategory) {
-                                    delete self.category.todosData[j];
-                                    localStorage.setItem('clearApp-todo', JSON.stringify(self.category.todosData));
+                        if(self.category.todosData) {
+                            var i = 1;
+                            while(self.category.todosData[i] != null) {i++;}
+                            var length = i - 1;
+                            if (length !== 0 && self.category.deletedCategory !== null) {
+                                for (var j = 1; j <= length; j++) {
+                                    if (self.category.todosData[j].category == self.category.deletedCategory) {
+                                        delete self.category.todosData[j];
+                                        localStorage.setItem('clearApp-todo', JSON.stringify(self.category.todosData));
+                                    }
                                 }
                             }
                         }

@@ -3,13 +3,12 @@ define([
 	'underscore',
 	'backbone',
     'models/todo',
-    'views/BaseView',
 	'views/todoview',
     'shared',
 	'text!templates/todo.html',
 	'text!templates/category.html'
-	], function($, _, Backbone, TodoModel, BaseView, TodoView, Shared, todoTemplate, categoryTemplate){
-	var TodoListView = BaseView.extend({
+	], function($, _, Backbone, TodoModel, TodoView, Shared, todoTemplate, categoryTemplate){
+	var TodoListView = Backbone.View.extend({
 				
 		el: $('div.content'),
 
@@ -53,8 +52,8 @@ define([
             this.category.name = options.category;
             this.category.id = options.id;         
             _.bindAll(this, 'addOne', 'addAll', 'render');
-    		this.bindTo(this.collection, 'reset', this.render);
-    		this.bindTo(this.collection, 'add', this.addOne);
+    		this.collection.bind('reset', this.render);
+    		this.collection.bind('add', this.addOne);
             var self = this;
             for (var i = 0; i < this.categoryCollection.models.length; i++) {
                 if (this.categoryCollection.models[i].attributes.id == this.category.id) {
