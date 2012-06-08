@@ -3,7 +3,8 @@ What is this?
 
 A todo list web application which achieves an effect of the iOS Clear app(Firefox only).
 
-The original iOS Clear app: http://www.realmacsoftware.com/clear/
+The original iOS Clear app: 
+[http://www.realmacsoftware.com/clear/](http://www.realmacsoftware.com/clear/)
 
 How did I do this?
 ====================
